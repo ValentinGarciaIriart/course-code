@@ -1,5 +1,9 @@
 name: Working Dirs & Shells
 on: [push]
+defaults:
+    run:
+        shell: bash #acordate que windows es powershell, por mas que los comandos esten en powershell, tiraria error, peeero ir mas abajo
+        #working-directory: /de/ed
 
 jobs:
     display-wd-info:
@@ -12,13 +16,24 @@ jobs:
                   echo $GITHUB_SHA
                   echo $GITHUB_REPOSITORY
                   echo $GITHUB_WORKSPACE
+            - name: Change Working Directory
+              working-directory: /home/runner
+              run: pwd
     display-wd-info-windows:
         runs-on: windows-latest
+        defaults:
+            run: 
+                shell: pwsh #con esto se hace un override y termina laburando en powershell, no tirando error
         steps:
             - name: Display Working Directory & List Files
               run: |
-                  pwd
-                  ls -a
-                  echo $GITHUB_SHA
-                  echo $GITHUB_REPOSITORY
-                  echo $GITHUB_WORKSPACE
+                  Get-Location
+                  dir
+                  echo $env:GITHUB_SHA
+                  echo $env:GITHUB_REPOSITORY
+                  echo $env:GITHUB_WORKSPACE
+            - name: Python Shell
+              shell: python
+              run: |
+                  import platform
+                  print (platform.processor())
