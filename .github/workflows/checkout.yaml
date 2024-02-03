@@ -15,4 +15,12 @@ jobs: #lo que hace es descargar los archivos de mi repo y los tira en el directo
                   git fetch origin
                   git checkout main  
             - name: List Files After
-              run: ls -a      
+              run: ls -a   
+    checkout-action:
+        runs-on: ubuntu-latest
+        steps:
+            - name: List Files Before
+              run: ls -a
+            - uses: actions/checkout@v3
+            - name: List Files After
+              run: ls -a  
