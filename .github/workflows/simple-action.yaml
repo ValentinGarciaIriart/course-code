@@ -1,0 +1,17 @@
+name: Simple Action
+on: [push]
+
+
+jobs:
+    simple-action:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Simple JS Action
+              uses: actions/hello-world-javascript-action@558e078d214bb3b8cc261f7dfe67136f1e9b6a33  #esto es para usar actions, se pone el nombre y el repo si es público, si no
+              #hay que poner la ruta (si es privado). Hay que tener en cuenta el tema del versionado, si es un "LTS" o algo por el estilo de la rama
+              #podes usar versionado (tags) o el sha del commit
+              with: 
+                who-to-greet: Valentin
+            - name: Log Greeting Time
+              run: echo "${{ steps.greet.outputs.time }}"
+
