@@ -1,10 +1,10 @@
 name: First Workflow
-on: [push]
+on: [push] # de esta forma se ejecuta el workflow, al hacer un push en el repositorio
 
-jobs:
-  run-shell-commands:
-    runs-on: ubuntu-latest
-    steps:
+jobs: #necesitas una seccion de jobs que es lo que va a hacer el workflow
+  run-shell-commands: # nombre del trabajo
+    runs-on: ubuntu-latest 
+    steps: #pasos del trabajo
       - name: echo a string
         run: echo "Hello World"
       - name: Multiline Command
@@ -18,7 +18,7 @@ jobs:
         run: sw_vers
   dependant-job:
     runs-on: windows-latest
-    needs: run-shell-commands
+    needs: run-shell-commands # cuando clavas un needs, significa que necesita que termine uno o varios jobs para poder ejecutarse
     steps:
       - name: echo a string
         run: Write-Output "Windows String"
