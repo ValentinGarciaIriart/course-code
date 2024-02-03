@@ -11,9 +11,9 @@ jobs:
               run: echo "::error title= Error title, file=app.js,line=2,endLine=3,endColumn=7::Missing Semicolon"
             - name: Setting a debug message with params
               run: echo "::debug title= Debug title, file=app.js,line=2,endLine=3,endColumn=7::Missing Semicolon"
-            - name: Setting a warning message with params
+            - name: Setting a warning message with params #larga un warning en el log
               run: echo "::warning title= Warning title, file=app.js,line=2,endLine=3,endColumn=7::Missing Semicolon"
-            - name: Setting a notice message with params
+            - name: Setting a notice message with params #larga un notice en el log
               run: echo "::notice title= Notice title, file=app.js,line=2,endLine=3,endColumn=7::Missing Semicolon" 
             - name: Group of logs
               run: |
@@ -21,6 +21,7 @@ jobs:
                    echo "Inside group"
                    echo "::endgroup::"
             - name: Masking a value
-              run: echo "::add-mask::Secret String"
+              run: echo "::add-mask::Secret String" #de esta forma se enmascara "Secret String", sirve cuando queres guardar
+              #secretos
             - name: Echo a secret
               run: echo "Secret String"
