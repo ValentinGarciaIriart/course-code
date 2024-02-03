@@ -23,4 +23,4 @@ jobs: #necesitas una seccion de jobs que es lo que va a hacer el workflow
       - name: echo a string
         run: Write-Output "Windows String"
       - name: Error Step
-        run: doesnotexitsss
+        run: doesnotexitsssa
