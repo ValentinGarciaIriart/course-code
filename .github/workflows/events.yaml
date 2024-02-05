@@ -1,5 +1,10 @@
 name: Repository Events
-on: [push, pull_request, issues]
+on:  #al crear una branch, se produce un push, entonces se ejecuta una accion
+   push:
+   pull_request:
+    types: [opened,assigned,reopened, synchronize]
+   issues:
+    types: [opened]
 
 jobs:
     checkout-test:
