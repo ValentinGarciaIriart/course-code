@@ -8,4 +8,4 @@ jobs:
     echo-a-string:
         runs-on: ubuntu-latest
         steps:
-            - run: echo ${{github.event.client_payload.env}}
+            - run: echo ${{github.event.client_payload.env}} #github in this case is he context, and then you use the events from that context
