@@ -7,12 +7,12 @@ jobs:
   pr-comment:
     runs-on: ubuntu-latest
     permissions:
-      issues: write #con read o write-all al lado de permissions, delegas esos permisos para cualquier scope o ambito, con {} los desactivas
+      pull-requests: write #con read o write-all al lado de permissions, delegas esos permisos para cualquier scope o ambito, con {} los desactivas
     steps:
       - name: Comment on New PRs
         uses: actions/github-script@v6
         with: #como es un input va un with
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}} #lo comento aca, el scope de los PR y de los issues son totalmente distintos
           script: |
             github.rest.issues.createComment({
               owner: context.repo.owner,
