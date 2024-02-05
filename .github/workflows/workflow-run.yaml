@@ -3,6 +3,8 @@ on:
     workflow_run:
         workflows: [Repository Events]
         types: [completed]
+        branches: #as long as it runs in main, it'll run
+            - main
 jobs:
     echo-string:
         runs-on: ubuntu-latest

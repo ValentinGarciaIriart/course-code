@@ -1,8 +1,25 @@
 name: Repository Events
 on:  #al crear una branch, se produce un push, entonces se ejecuta una accion
    push:
-   pull_request:
-    types: [opened,assigned,reopened, synchronize]
+    branches: 
+        - main
+        - "feature/*" # matches feature/featA, feature/featB, does not match feature/featA/featB
+        - "feature/**" # does  match feature/featA/featB
+        - "!feature/featA" # the order is important, if you want to exclude, you'll have to put it after
+    #branches-ignore:
+    #    - feature/featA
+    tags:
+        - v1.* # match v1.1, v1.1.2
+        - "!v1.1.1"
+    paths:
+        - "**.js"
+        - "!app.js"
+   pull_request: #tags are not allowed in pull_request
+    types: [opened, assigned, reopened, synchronize]
+    branches:
+        - main
+    paths: 
+        - "**.js"
    issues:
     types: [opened]
 
