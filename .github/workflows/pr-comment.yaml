@@ -7,7 +7,7 @@ jobs:
   pr-comment:
     runs-on: ubuntu-latest
     permissions:
-      issues: read #con read o write-all al lado de permissions, delegas esos permisos para cualquier scope o ambito, con {} los desactivas
+      issues: write #con read o write-all al lado de permissions, delegas esos permisos para cualquier scope o ambito, con {} los desactivas
     steps:
       - name: Comment on New PRs
         uses: actions/github-script@v6
