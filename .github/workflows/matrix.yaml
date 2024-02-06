@@ -20,7 +20,7 @@ jobs:
              - os: ubuntu-latest
                node-version: 17 #como no existe ninguna combinacion, se crea unicamente con ubuntu y node 17, es decir, lo de is-ubuntu y experimental no
           exclude:
-            - os: ubuntu-latest #solo las originales
+            - os: ubuntu-latest #solo las originalesx
               node-version: 14 
         fail-fast: false # estando en falso, previene que GitHub cancele los trabajos en curso si uno fallo
           #max-parallel: 3
