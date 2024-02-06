@@ -6,6 +6,8 @@ on:
         description: "Environment"
         type: environment
         required: true
+        
+concurrency: concurrency-1 #es un concurrency group, asi corre de a uno a la vez
 jobs:
   sleep:
     runs-on: ubuntu-latest
