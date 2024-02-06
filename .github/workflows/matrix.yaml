@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
     node-matrix: #esto es para correr multiples trabajos pero con distintas variables
-      continue-on-error: false #ya que si falla alguno de los trabajos, continua de todas formas, si no fallaria todo el workflow (pending, o en curso)
+      continue-on-error: ${{matrix.experimental == true}} #ya que si falla alguno de los trabajos, continua de todas formas, si no fallaria todo el workflow (pending, o en curso)
       strategy:
         matrix:
           os: [ubuntu-latest,windows-latest] #agregando una segunda (bidimensional)
