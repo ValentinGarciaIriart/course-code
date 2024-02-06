@@ -7,7 +7,11 @@ on:
         type: environment
         required: true
         
-concurrency: concurrency-1 #es un concurrency group, asi corre de a uno a la vez
+concurrency:  
+ group: concurrency-1
+ cancel-in-progress: true
+# los trabajos del medio (luego del primero) van a ser cancelados, y el ultimo quedara en pending (sin el cancel in progress)
+#es un concurrency group, asi corre de a uno a la vez
 jobs:
   sleep:
     runs-on: ubuntu-latest
