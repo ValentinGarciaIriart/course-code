@@ -1,4 +1,5 @@
 name: Concurrency 1
+run-name: Concurrency 1 (${{inputs.environment}})
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +9,7 @@ on:
         required: true
         
 concurrency:  
- group: concurrency-1
+ group: ${{github.event.inputs.environment}} #para acceder al entorno de forma dinamica
  cancel-in-progress: true
 # los trabajos del medio (luego del primero) van a ser cancelados, y el ultimo quedara en pending (sin el cancel in progress)
 #es un concurrency group, asi corre de a uno a la vez
