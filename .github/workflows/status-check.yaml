@@ -4,10 +4,11 @@ on: [push]
 jobs:
   job-1:
     runs-on: ubuntu-latest
+    timeout-minutes: 1 #ahora estando en el scope del job, si tooodos los steps tardan mas de un minuto, el workflow se cancela
     steps:
       - name: Step 1
         run: sleep 65
-        timeout-minutes: 1
+        #timeout-minutes: 1 #si el step no se ejecuta dentro de un minuto falla
       - name: Step 2
         id: step-2
         continue-on-error: true #con esto, si falla, sigue corriendo el resto de los steps
