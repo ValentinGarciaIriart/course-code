@@ -22,10 +22,12 @@ jobs:
           exclude:
             - os: ubuntu-latest #solo las originalesx
               node-version: 14 
-        fail-fast: false # estando en falso, previene que GitHub cancele los trabajos en curso si uno fallo
+        fail-fast: true # estando en falso, previene que GitHub cancele los trabajos en curso si uno fallo
           #max-parallel: 3
       runs-on: ${{matrix.os}}
       steps:
+        - if: matrix.experimental == true
+          run: exit 1
         - run: node -v
         - run: echo '${{toJson(matrix)}}'
         - uses: actions/setup-node@v3
