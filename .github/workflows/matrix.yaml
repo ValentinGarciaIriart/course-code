@@ -1,0 +1,15 @@
+name: Matrix
+on: [push]
+
+jobs:
+    node-matrix: #esto es para correr multiples trabajos pero con distintas variables
+     runs-on: ubuntu-latest
+     strategy:
+        matrix:
+            node-version: [14,15,16]
+     steps:
+        - run: node -v
+        - uses: actions/setup-node@v3
+          with:
+            node-version: ${{matrix.node-version}} #asi es como se accede a la matriz, con contextos
+        - run: node -v
