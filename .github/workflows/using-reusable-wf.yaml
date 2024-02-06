@@ -18,6 +18,8 @@ jobs: #TODO EL TRABAJO USARA EL WORKFLOW, NO VA AL STEP LEVEL PARA REUSAR
             #si pones inherit en la linea anterior, el reusable puede acceder a todos los secretos de este workflow
     calling-a-reusable-wf-in-same-repo:
         uses: ./.github/workflows/reusable-workflow.yaml
+        secrets:
+            access-token: inherit
     using-reusable-wf-output:
         runs-on: ubuntu-latest
         needs: calling-a-reusable-wf-in-same-repo

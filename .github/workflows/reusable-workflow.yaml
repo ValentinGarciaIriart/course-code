@@ -8,6 +8,12 @@ on:
 
 
 jobs:
+    nested-workflow-call:
+        uses: ValentinDevOps/workflows/.github/workflows/reusable.yaml@main #tenes que poner el path si esta en un repo distinto como aca
+        with:
+            name: "Valentin"
+        secrets:
+            access-token: ${{secrets.ACCESS_TOKEN}}
     generate-output:
         runs-on: ubuntu-latest
         outputs:
