@@ -9,7 +9,7 @@ on:
         required: true
         
 concurrency:  
- group: ${{github.event.inputs.environment}} #para acceder al entorno de forma dinamica
+ group: ${{github.workflow}}-${{github.event.inputs.environment}} #para acceder al entorno de forma dinamica y se agrega el workflow porque si no se asume el "mismo trabajo"
  cancel-in-progress: true
 # los trabajos del medio (luego del primero) van a ser cancelados, y el ultimo quedara en pending (sin el cancel in progress)
 #es un concurrency group, asi corre de a uno a la vez
