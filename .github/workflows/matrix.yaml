@@ -3,10 +3,11 @@ on: [push]
 
 jobs:
     node-matrix: #esto es para correr multiples trabajos pero con distintas variables
-     runs-on: ubuntu-latest
      strategy:
         matrix:
-            node-version: [14,15,16]
+            os: [ubuntu-latest,windows-latest] #agregando una segunda (bidimensional)
+            node-version: [14,15,16] #esta es la matriz (unidimensional)
+     runs-on: ${{matrix.os}}
      steps:
         - run: node -v
         - uses: actions/setup-node@v3
