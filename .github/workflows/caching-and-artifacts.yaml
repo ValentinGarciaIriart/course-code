@@ -1,0 +1,25 @@
+name: Caching and Artifacts
+on: [workflow_dispatch]
+jobs:
+  use-axios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache node modules
+        id: cache-dependencies
+        uses: actions/cache@v3 #permite inputs (los del with) y outputs
+        with:
+          path: ~/.npm
+          key: "npm-cache" #la primera vez no va a haber una key, porque no hay nada en cache, la segunda si se va a crear
+          # en github hay una seccion de cache y ahi va a estar la key
+      - name: Display Cache Output
+        run: echo '${{ toJSON(steps.cache-dependencies.outputs) }}'
+      - name: Install dependencies
+        run: npm install
+      - name: Use Axios
+        uses: actions/github-script@v6 # sin el cache de actions, lo que hace es, cada vez que corre el wf, se instalan los paquetes en cada instancia del runner machine
+        with:
+          script: |
+            const axios = require('axios');
+            const res = await axios('https://icanhazdadjoke.com/', { headers: { Accept: 'text/plain' } })
+            console.log(res.data)
