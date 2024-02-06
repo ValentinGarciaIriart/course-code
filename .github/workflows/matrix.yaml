@@ -3,13 +3,31 @@ on: [push]
 
 jobs:
     node-matrix: #esto es para correr multiples trabajos pero con distintas variables
-     strategy:
+      continue-on-error: false #ya que si falla alguno de los trabajos, continua de todas formas, si no fallaria todo el workflow (pending, o en curso)
+      strategy:
         matrix:
-            os: [ubuntu-latest,windows-latest] #agregando una segunda (bidimensional)
-            node-version: [14,15,16] #esta es la matriz (unidimensional)
-     runs-on: ${{matrix.os}}
-     steps:
+          os: [ubuntu-latest,windows-latest] #agregando una segunda (bidimensional)
+          node-version: [14,15,16] #esta es la matriz (unidimensional)
+          include:
+             - os: ubuntu-latest #si ya existe el valor de os, no se hace un override, entonces no se agrega a los ya previo ubuntu-latest
+               is-ubuntu: true
+             - os: macos-latest #como no se hace un override, se va a agregar macos a la matriz con node en version 15
+               node-version: 15
+             - experimental: false #se agrega a todas las combinaciones originales (no las incluidas)
+             - os: ubuntu-latest
+               node-version: 16
+               experimental: true #en este caso la combinacion de ubuntu y node 16, va a cambiar el valor a true en experimental
+             - os: ubuntu-latest
+               node-version: 17 #como no existe ninguna combinacion, se crea unicamente con ubuntu y node 17, es decir, lo de is-ubuntu y experimental no
+          exclude:
+            - os: ubuntu-latest #solo las originales
+              node-version: 14 
+        fail-fast: false # estando en falso, previene que GitHub cancele los trabajos en curso si uno fallo
+          #max-parallel: 3
+      runs-on: ${{matrix.os}}
+      steps:
         - run: node -v
+        - run: echo '${{toJson(matrix)}}'
         - uses: actions/setup-node@v3
           with:
             node-version: ${{matrix.node-version}} #asi es como se accede a la matriz, con contextos
