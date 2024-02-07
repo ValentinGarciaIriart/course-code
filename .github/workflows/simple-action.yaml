@@ -6,13 +6,15 @@ jobs:
     simple-action:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3
             - name: Simple JS Action
               id: greet # de esta forma se puede referencia en el otro step
-              uses: actions/hello-world-javascript-action@558e078d214bb3b8cc261f7dfe67136f1e9b6a33  #esto es para usar actions, se pone el nombre y el repo si es público, si no
+              uses: ./.github/actions/hello
+              #uses: actions/hello-world-javascript-action@558e078d214bb3b8cc261f7dfe67136f1e9b6a33  #esto es para usar actions, se pone el nombre y el repo si es público, si no
               #hay que poner la ruta (si es privado). Hay que tener en cuenta el tema del versionado, si es un "LTS" o algo por el estilo de la rama
               #podes usar versionado (tags) o el sha del commit
               with: 
-                who-to-greet: Valentin
+                who_to_greet: Valentin
             - name: Log Greeting Time
               run: echo "${{ steps.greet.outputs.time }}" #aca se referencia, el output es parte de la action de JS
 
