@@ -10,8 +10,12 @@ jobs:
         uses: actions/cache@v3 #permite inputs (los del with) y outputs
         with:
           path: ~/.npm
-          key: "npm-cache" #la primera vez no va a haber una key, porque no hay nada en cache, la segunda si se va a crear
-          # en github hay una seccion de cache y ahi va a estar la key
+          key: ${{runner.os}}-npm-cache-${{hashFiles('**/package-lock.json')}} #la primera vez no va a haber una key, porque no hay nada en cache, la segunda si se va a crear
+          # en github hay una seccion de cache y ahi va a estar la key. La linea anterior forma una cache key de este estilo:
+          # linux-npm-cache-7984955
+          restore-keys: | #esto es en caso de que no encuentre alguna cache key, y va a buscar keys que empiecen con estos 2 formatos
+           ${{runner.os}}-npm-cache-
+           ${{runner.os}}-
       - name: Display Cache Output
         run: echo '${{ toJSON(steps.cache-dependencies.outputs) }}'
       - name: Install dependencies
