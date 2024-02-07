@@ -19,4 +19,4 @@ runs:
   env:
     HELLO: WORLD
   post-entrypoint: "/cleanup.sh"
-  post-if: runner.os == 'linux'g
+  post-if: runner.os == 'linux'
