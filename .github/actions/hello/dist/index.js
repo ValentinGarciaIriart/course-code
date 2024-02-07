@@ -30794,9 +30794,11 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(6474); //se puede formatear para hacer mensajes de warning y todo eso
+//luego de compilarlo en un archivo (directorio dist creado, cambio el yaml y ahi puede crearse mi accion con sus dependencias)
 const github = __nccwpck_require__(7341);
 
 try {
+  throw new Error("Some error message");
   core.debug("Debug Message");
   core.warning("Warning message");
   core.error("Error message");
