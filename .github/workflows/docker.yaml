@@ -25,3 +25,13 @@ jobs:
           cat /etc/os-release
       - name: Log Env
         run: echo $API_URL
+      - name: Container in a Step
+        uses: docker://node:18.16-alpine3.17 #corre en un contenedor distinto a los otros 2 trabajos pero compartiendo la misma red
+        with:
+          entrypoint: /usr/local/bin/node #sobreescribe el entrypoint de la imagen si existe, si no, lo agrega. Esto es en ubuntu y MAC
+          #no es siempre necesario el entrypoint como entre la 36 y 37
+          args: -p 2+3
+      - name: Log node version
+        uses: docker://node:18.16-alpine3.17
+        with:
+          args: -v
