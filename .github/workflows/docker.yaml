@@ -54,4 +54,4 @@ jobs:
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
             SLACK_TITLE: From Github Actions
             SLACK_MESSAGE: "Actor: ${{github.actor}}, Event: ${{github.event_name}}"
-            SLACK_COLOR: "#723fc4"
+            SLACK_COLOR: "#723fc4" #XD
