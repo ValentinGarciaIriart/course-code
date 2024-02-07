@@ -1,0 +1,27 @@
+name: Docker
+on: [workflow_dispatch]
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20.3-alpine3.17
+      # credentials:
+      #   username:
+      #   password:  Las credenciales van unicamente si la imagen de docker es privada
+      env:
+        API_URL: some-url.com
+      ports:
+        - 80 # para exponer en el contenedor de docker
+      # volumes:
+      #   - vol_name:/path/in/container named volumes
+      #   - /path/to/container volumenes anonimos
+      #   - /path/in/host:/path/in/container bind mount
+      # options: --cpus 1 
+    steps:
+      - name: Log Node & OS Versions
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Log Env
+        run: echo $API_URL
