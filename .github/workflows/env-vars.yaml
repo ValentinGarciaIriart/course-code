@@ -17,7 +17,7 @@ jobs:
             - name: Log Context
               run: echo '${{github.ref}}' # mientras que aca github actions evalua el valor y le manda el echo con el valor al runner machine
             - name: Set Env Var
-              # lo que esta en las lineas 22 y 23 (por ejemplo) es para setear variables de entorno de manera dinamica asignandose dentro del 
+              # lo que esta en las lineas 23 y 24 (por ejemplo) es para setear variables de entorno de manera dinamica asignandose dentro del 
               #archivo de variables de entorno, que es $GITHUB_ENV
               run: |
                echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV" 
