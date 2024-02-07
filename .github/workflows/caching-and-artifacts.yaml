@@ -12,7 +12,7 @@ jobs:
           path: ~/.npm
           key: ${{runner.os}}-npm-cache-${{hashFiles('**/package-lock.json')}} #la primera vez no va a haber una key, porque no hay nada en cache, la segunda si se va a crear
           # en github hay una seccion de cache y ahi va a estar la key. La linea anterior forma una cache key de este estilo:
-          # linux-npm-cache-7984955
+          # linux-npm-cache-7984955. De esta forma al instalar nuevas dependencias, se crea una nueva cache dinamicamente.
           restore-keys: | #esto es en caso de que no encuentre alguna cache key, y va a buscar keys que empiecen con estos 2 formatos
            ${{runner.os}}-npm-cache-
            ${{runner.os}}-
@@ -20,6 +20,16 @@ jobs:
         run: echo '${{ toJSON(steps.cache-dependencies.outputs) }}'
       - name: Install dependencies
         run: npm install
+      - name: Run Tests
+        run: npm test
+      - name: Upload Code Coverage Report
+        uses: actions/upload-artifact@v3
+        if: always() 
+        # aun si el test falla, que siga corriendo
+        with:
+            name: code-coverage
+            path: coverage #in the folder coverage
+            retention-days: 10 #by default is 90
       - name: Use Axios
         uses: actions/github-script@v6 # sin el cache de actions, lo que hace es, cada vez que corre el wf, se instalan los paquetes en cada instancia del runner machine
         with:
