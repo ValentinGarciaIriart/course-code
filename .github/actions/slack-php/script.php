@@ -8,7 +8,7 @@ var_dump($_ENV);
 echo "::debug:: Sending a request to slack\n";
 
 $response =  WpOrg\Requests\Requests::post(
-  '',
+  $_ENV['INPUT_SLACK_WEBHOOK'],
   array(
     'Content-Type' => 'application/json'
   ),
@@ -19,7 +19,7 @@ $response =  WpOrg\Requests\Requests::post(
                 "type" => "section",
                 "text" => array (
                     "type" => "mrkdwn",
-                    "text" => 'Message',
+                    "text" => $_ENV['INPUT_MESSAGE'],
                 ),
             ),
             array (
@@ -27,19 +27,19 @@ $response =  WpOrg\Requests\Requests::post(
                 "fields" => array (
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Repository:*\nRepository",
+                        "text" => "*Repository:*\n{$_ENV['GITHUB_REPOSITORY']}",
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Event:*\nEvent",
+                        "text" => "*Event:*\n{$_ENV['GITHUB_EVENT_NAME']}",
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*Ref:*\nRef",
+                        "text" => "*Ref:*\n{$_ENV['GITHUB_REF']}",
                     ),
                     array (
                         "type" => "mrkdwn",
-                        "text" => "*SHA:*\nSHA",
+                        "text" => "*SHA:*\n{$_ENV['GITHUB_SHA']}",
                     ),
                 ),
             ),
